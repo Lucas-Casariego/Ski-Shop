@@ -9,12 +9,13 @@ namespace API.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : Controller
 {
+    #region contructor and field
     private readonly StoreContext _context;
-
     public ProductsController(StoreContext context)
     {
         _context = context;
     }
+    #endregion
 
     [HttpGet]
     public async Task<ActionResult<List<Product>>> GetProductsAsync()

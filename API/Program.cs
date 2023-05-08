@@ -18,16 +18,26 @@ public class Program
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
+        builder.Services.AddCors();
+
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        app.UseSwagger();
-
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ski-Shop API V1"));
+        if(app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
         app.UseHttpsRedirection();
+        // we're gonna modify the request in it's way out (adding cors-headers)
+        app.UseCors(options =>
+        {
+            options.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+        });
+
 
         app.UseAuthorization();
 
