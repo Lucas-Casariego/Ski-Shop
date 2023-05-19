@@ -1,5 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+.editorconfig
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio 
+.vs/
+bin/
+obj/
+packages/
+
 # dependencies
 /node_modules
 /.pnp

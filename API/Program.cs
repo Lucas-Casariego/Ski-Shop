@@ -1,6 +1,6 @@
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace API;
 
@@ -25,10 +25,12 @@ public class Program
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if(app.Environment.IsDevelopment())
+        app.UseMiddleware<ExceptionMiddleware>();
+
+        if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ski Shop API V1"));
         }
 
         app.UseHttpsRedirection();
