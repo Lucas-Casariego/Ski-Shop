@@ -21,6 +21,7 @@ public class ProductsController : BaseApiController
         return await _context.Products.ToListAsync();
     }
 
+
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetProductAsync(int id)
     {
@@ -30,4 +31,5 @@ public class ProductsController : BaseApiController
 
         return product;
     }
+
 }

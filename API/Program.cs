@@ -34,10 +34,10 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-        // we're gonna modify the request in it's way out (adding cors-headers)
+        // we're gonna modify the request in it's way out (adding cors-headers 
         app.UseCors(options =>
-        {
-            options.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+        {                                                 // (*) 
+            options.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
         });
 
 
@@ -58,7 +58,8 @@ public class Program
             throw;
         }
 
-
         app.Run();
     }
 }
+
+// to allow our client to pass the cookies backwards and forewards from our api server
